@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+  <div class="header-list-page">
+    <h1 class="title">Fácil Tecnologia - Vaga PHP - Écio Silva</h1>
+    <h3>Questão 2</h3>
+  </div>
+  {% if items|length %}
+  <table id="products-list" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Banco</th>
+        <th width="15%">Verba</th>
+        <th width="20%">Data Mais Antigo</th>
+        <th width="20%">Data Mais Novo</th>
+        <th width="15%">Total Contratos</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in items %}
+      <tr>
+        <td>{{ item.nome }}</td>
+        <td>{{ item.verba | number_format(2, ",", ".") }}</td>
+        <td>{{ item.contrato_data_antigo }}</td>
+        <td>{{ item.contrato_data_novo }}</td>
+        <td>{{ item.contrato_valor_total | number_format(2, ",", ".") }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Banco</th>
+        <th>Verba</th>
+        <th>Data Maior Contrato</th>
+        <th>Data Menor Contrato</th>
+        <th>Total Contratos</th>
+      </tr>
+    </tfoot>
+  </table>
+  {% else %}
+  <p>No product available.</p>
+  {% endif %}
+  <p class="text-center mt-5">
+    <a href="/" class="btn-action"><i class="fa fa-arrow-left"></i> Página Inicial</a>
+  </P>
+  
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

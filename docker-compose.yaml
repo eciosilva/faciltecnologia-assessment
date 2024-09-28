@@ -1,0 +1,48 @@
+version: '2'
+networks:
+  facil-tecnologia-assessment:
+    external: false
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: facil-tecnologia-assessment
+    container_name: facil-tecnologia-assessment-web
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    command: >
+      sh -c "composer install --ignore-platform-reqs 
+      && docker-php-entrypoint php-fpm"
+    networks:
+      - facil-tecnologia-assessment
+  nginx:
+    image: nginx:1.17-alpine
+    container_name: facil-tecnologia-assessment-nginx
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+    networks:
+      - facil-tecnologia-assessment
+  db:
+    image: mysql/mysql-server:8.0.23
+    container_name: facil-tecnologia-assessment-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - facil-tecnologia-assessment
+    ports:
+      - 3306:3306
