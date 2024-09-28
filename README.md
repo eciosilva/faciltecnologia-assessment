@@ -1,6 +1,14 @@
 # faciltecnologia-assessment
 Teste para Vaga de PHP da Fácil Tecnologia
 
+## Como rodar o projeto
+
+- Você deve ter o Docker instalado;
+- Certifique-se de que as portas 8080 e 3306 não estão em uso na sua máquina (ou mude as portas no arquivo docker-compose.yaml);
+- Clone o repositório e faça o checkout da branch **features/exeucao-teste** (ou, após a aceitação do Pull Request, pode-se usar a branch principal - main);
+- Rode o seguinte comando via command line: docker-compose up --build -d;
+- Acesso a aplicação em seu navegador pela url: http://localhost:8080.
+
 ## Instruções do Teste
 
 1. ATENÇÃO: LEMBRAR DE INFORMAR O LINK DO MERGE REQUEST CRIADO NO CAMPO RESPOSTA QUANDO FINALIZAR O TESTE
